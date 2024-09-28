@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 2
   _damage: 0.1
-  _fireRate: 3
-  _range: 5
+  _fireRate: 1
+  _range: 10
   _fireSpread: 3
-  _reloadTime: 4
+  _reloadTime: 0.1
   _magazineCapacity: 4
+  _bulletPerShoot: 2

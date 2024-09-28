@@ -17,9 +17,7 @@ namespace PlayerWeapon.Installers.Weapon
         
         [Header("Bullet")]
         [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Transform _firePointTransform;
-        
-           
+
         public override void InstallBindings()
         {
             BindFireWeapons();
@@ -33,7 +31,7 @@ namespace PlayerWeapon.Installers.Weapon
 
             foreach (var prefab in _fireWeaponPrefabs)
             {
-                var weapon = _fireWeaponFactory.CreateWeapon(new FireShootBehaviour(_bulletPrefab, _firePointTransform, prefab.WeaponData), prefab,
+                var weapon = _fireWeaponFactory.CreateWeapon(new FireShootBehaviour(_bulletPrefab, prefab.WeaponData), prefab,
                     _weaponHolderTransform.position, Quaternion.identity, _weaponHolderTransform);
 
                 weapons.Add(weapon);

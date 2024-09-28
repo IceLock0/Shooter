@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Weapon
+namespace Weapon.Components
 {
     public interface IReloadble
     {

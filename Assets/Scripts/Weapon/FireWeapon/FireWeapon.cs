@@ -4,19 +4,21 @@ using Configs.Weapon;
 using Enum;
 using Unity.VisualScripting;
 using UnityEngine;
+using Weapon.Components;
 
 namespace Weapon.FireWeapon
 {
-    public class FireWeapon : MonoBehaviour, IShooter, IReloadble, IWeapon
+    public class FireWeapon : MonoBehaviour, IFireWeapon
     {
         [SerializeField] private FireWeaponData _weaponData;
 
         private IShootBehaviour _shootBehaviour;
 
         private bool _isReloading;
-
-        public FireWeaponData WeaponData => _weaponData;
+        
         private float _fireTimer;
+        
+        public FireWeaponData WeaponData => _weaponData;
         
         public void Initialize(IShootBehaviour shootBehaviour)
         {
@@ -27,20 +29,17 @@ namespace Weapon.FireWeapon
             _fireTimer = _weaponData.ConfigData.FireRate;
         }
 
-        private void Update()
-        {
-            _fireTimer += Time.deltaTime;
-        }
-
         public void Shoot()
         {
-            if (_isReloading || _weaponData.CurrentAmmo <= 0) return;
-            if (_fireTimer < _weaponData.ConfigData.FireRate) return;
+            if (!IsCanShoot()) return;
 
-            _weaponData.CurrentAmmo--;
-
-            if (_weaponData.CurrentAmmo == 0)
+            if (_weaponData.CurrentAmmo < _weaponData.ConfigData.BulletPerShoot)
+            {
                 StartCoroutine(Reload());
+                return;
+            }
+
+            _weaponData.CurrentAmmo -= _weaponData.ConfigData.BulletPerShoot;
             
             _shootBehaviour.Shoot();
 
@@ -57,6 +56,16 @@ namespace Weapon.FireWeapon
 
         public bool IsWeaponTypeMatch(WeaponType weaponType) => weaponType == _weaponData.ConfigData.WeaponType;
 
+        private bool IsCanShoot()
+        {
+            return !(_isReloading || _fireTimer < _weaponData.ConfigData.FireRate);
+        }
+        
+        private void Update()
+        {
+            _fireTimer += Time.deltaTime;
+        }
+        
         [Serializable]
         public class FireWeaponData
         {

@@ -342,9 +342,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9072263058249794949, guid: 751f0e01647ddfa4482844ff0a3f4db4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 863481112}
-    - targetCorrespondingSourceObject: {fileID: 9072263058249794949, guid: 751f0e01647ddfa4482844ff0a3f4db4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1067689593}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1550108905178578001, guid: 751f0e01647ddfa4482844ff0a3f4db4, type: 3}
       insertIndex: -1
@@ -748,38 +745,7 @@ Transform:
   m_GameObject: {fileID: 863481111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.683, y: 0, z: -0.606}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 85186649}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1067689592
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1067689593}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1067689593
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067689592}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 0, z: -0.6}
+  m_LocalPosition: {x: 0.806, y: 0, z: -0.373}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -838,7 +804,6 @@ MonoBehaviour:
   - {fileID: 8206629655341194544, guid: 3f1820772907eb3478bfe2a7192af512, type: 3}
   _weaponHolderTransform: {fileID: 863481112}
   _bulletPrefab: {fileID: 36994039447059890, guid: 9792999508a9af8418e55ce7bd3dd5dd, type: 3}
-  _firePointTransform: {fileID: 1067689593}
 --- !u!4 &1262147664
 Transform:
   m_ObjectHideFlags: 0

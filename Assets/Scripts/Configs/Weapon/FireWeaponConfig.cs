@@ -15,7 +15,8 @@ namespace Configs.Weapon
         [SerializeField] private float _fireSpread;
         [SerializeField] private float _reloadTime;
         [SerializeField] private int _magazineCapacity;
-
+        [SerializeField] private int _bulletPerShoot;
+        
         public WeaponType WeaponType => weaponType;
 
         public float Damage => _damage;
@@ -24,6 +25,7 @@ namespace Configs.Weapon
         public float FireSpread => _fireSpread;
         public float ReloadTime => _reloadTime;
         public int MagazineCapacity => _magazineCapacity;
+        public int BulletPerShoot => _bulletPerShoot;
         
         private void OnValidate()
         {
@@ -44,6 +46,9 @@ namespace Configs.Weapon
 
             if (_magazineCapacity <= 0)
                 _magazineCapacity = 1;
+
+            if (_bulletPerShoot > _magazineCapacity || _bulletPerShoot <= 0)
+                _bulletPerShoot = _magazineCapacity;
         }
     }
 }

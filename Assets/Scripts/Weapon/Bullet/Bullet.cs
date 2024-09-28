@@ -33,8 +33,6 @@ namespace PlayerWeapon.Weapon.Bullet
 
         private void Move()
         {
-            Debug.Log($"Direction = {_direction}");
-            
             transform.position += _direction * _speed * Time.deltaTime;
         }
         

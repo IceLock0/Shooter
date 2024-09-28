@@ -12,14 +12,13 @@ namespace PlayerWeapon
     public class PlayerWeaponHandler : MonoBehaviour
     {
         private List<FireWeapon> _fireWeapons = new();
-        
-        private InputService _inputService;
-
-        private bool _isShooting;
-
         private FireWeapon _currentWeapon;
         
         private WeaponChanger _weaponChanger;
+        
+        private bool _isShooting;
+
+        private InputService _inputService;
         
         [Inject]
         public void Initialize(InputService inputService, List<FireWeapon> fireWeapons, WeaponChanger weaponChanger)
