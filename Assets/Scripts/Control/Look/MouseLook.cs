@@ -1,4 +1,4 @@
-﻿using DefaultNamespace;
+﻿using Configs.Character;
 using UnityEngine;
 using Zenject;
 
@@ -37,7 +37,7 @@ namespace Movement.Look
 
         private void Look()
         {
-            var directionLook = _inputService.Gameplay.Look.ReadValue<Vector2>() * _playerConfig.MouseSensitivity * Time.deltaTime;
+            var directionLook = ReadLookVector() * _playerConfig.MouseSensitivity * Time.deltaTime;
             
             _rotation -= directionLook.y;
 

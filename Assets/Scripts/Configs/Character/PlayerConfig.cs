@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Configs.Character
 {
     [CreateAssetMenu(fileName = "Player config", menuName = "Configs/Character/Player", order = 0)]
     public class PlayerConfig : CharacterConfig

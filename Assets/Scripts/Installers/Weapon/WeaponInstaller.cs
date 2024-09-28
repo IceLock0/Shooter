@@ -9,37 +9,19 @@ namespace PlayerWeapon.Installers.Weapon
 {
     public class WeaponInstaller : MonoInstaller
     {
-        [Header("Weapon")]
         [SerializeField] private List<FireWeapon> _fireWeaponPrefabs;
-        [SerializeField] private Transform _weaponHolderTransform;
-
-        [Inject] FireWeaponFactory _fireWeaponFactory;
-        
-        [Header("Bullet")]
         [SerializeField] private Bullet _bulletPrefab;
 
         public override void InstallBindings()
         {
-            BindFireWeapons();
+            BindFireWeaponsPrefabs();
             BindWeaponChanger();
             BindWeaponView();
         }
 
-        private void BindFireWeapons()
+        private void BindFireWeaponsPrefabs()
         {
-            List<FireWeapon> weapons = new();
-
-            foreach (var prefab in _fireWeaponPrefabs)
-            {
-                var weapon = _fireWeaponFactory.CreateWeapon(new FireShootBehaviour(_bulletPrefab, prefab.WeaponData), prefab,
-                    _weaponHolderTransform.position, Quaternion.identity, _weaponHolderTransform);
-
-                weapons.Add(weapon);
-                
-                weapon.gameObject.SetActive(false);
-            }
-
-            Container.Bind<List<FireWeapon>>().FromInstance(weapons).AsSingle().NonLazy();
+            Container.Bind<List<FireWeapon>>().FromInstance(_fireWeaponPrefabs).AsSingle().NonLazy();
         }
 
         private void BindWeaponChanger()

@@ -15,11 +15,11 @@ namespace Weapon.FireWeapon
         private IShootBehaviour _shootBehaviour;
 
         private bool _isReloading;
-        
+
         private float _fireTimer;
-        
+
         public FireWeaponData WeaponData => _weaponData;
-        
+
         public void Initialize(IShootBehaviour shootBehaviour)
         {
             _shootBehaviour = shootBehaviour;
@@ -41,8 +41,6 @@ namespace Weapon.FireWeapon
 
             _weaponData.CurrentAmmo -= _weaponData.ConfigData.BulletPerShoot;
             
-            _shootBehaviour.Shoot();
-
             _fireTimer = 0.0f;
         }
 
@@ -60,19 +58,23 @@ namespace Weapon.FireWeapon
         {
             return !(_isReloading || _fireTimer < _weaponData.ConfigData.FireRate);
         }
-        
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void Update()
         {
             _fireTimer += Time.deltaTime;
         }
-        
+
         [Serializable]
         public class FireWeaponData
         {
-            [SerializeField] 
-            private FireWeaponConfig _configData;
+            [SerializeField] private FireWeaponConfig _configData;
 
-            public int CurrentAmmo { get; set; } 
+            public int CurrentAmmo { get; set; }
 
             public FireWeaponConfig ConfigData => _configData;
         }

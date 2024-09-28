@@ -21,10 +21,18 @@ namespace PlayerWeapon
         private InputService _inputService;
         
         [Inject]
-        public void Initialize(InputService inputService, List<FireWeapon> fireWeapons, WeaponChanger weaponChanger)
+        public void Initialize(InputService inputService, List<FireWeapon> fireWeaponPrefabs, FireWeaponFactory fireWeaponFactory, WeaponChanger weaponChanger)
         {
             _inputService = inputService;
-            _fireWeapons = fireWeapons;
+            
+            foreach (var prefab in fireWeaponPrefabs)
+            {
+                var weapon = fireWeaponFactory.CreateWeapon(new FireShootBehaviour(_bulletPrefab, prefab.WeaponData), prefab,
+                    _weaponHolderTransform.position, Quaternion.identity, _weaponHolderTransform);
+
+                weapons.Add(weapon);
+                
+            }
             
             _inputService.Enable();
 

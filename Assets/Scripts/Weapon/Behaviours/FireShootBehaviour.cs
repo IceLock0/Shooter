@@ -46,6 +46,12 @@ namespace Weapon
                
                var bullet = GameObject.Instantiate(_bulletPrefab, spawnPosition, Quaternion.identity, null);
 
+               Debug.Log($"Direction Before = {direction}");
+               
+               direction = ApplySpread(direction, _weaponData.ConfigData.FireSpread);
+               
+               Debug.Log($"Direction After = {direction}");
+               
                bullet.Initialize(direction, _weaponData.ConfigData.Range);
            }
         }
