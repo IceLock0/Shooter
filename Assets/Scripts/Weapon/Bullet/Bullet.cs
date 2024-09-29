@@ -8,20 +8,22 @@ namespace PlayerWeapon.Weapon.Bullet
 {
     public class Bullet : MonoBehaviour
     {
-        [Range(0.1f, 20.0f)]
-        [SerializeField] private float _speed;
+        [Range(0.1f, 20.0f)] [SerializeField] private float _speed;
 
         private Vector3 _direction;
         private Vector3 _startPosition;
         private float _range;
-        
+
         private float _damage;
 
         private List<IDamageEffect> _damageEffects;
 
         private GameObject _senderGO;
-        
-        public void Initialize(Vector3 direction, float range, float damage, List<IDamageEffect> damageEffects, GameObject senderGO)
+
+        private Action<Bullet> _returnToPoolAction;
+
+        public void Initialize(Vector3 direction, float range, float damage, List<IDamageEffect> damageEffects,
+            GameObject senderGO, Action<Bullet> returnToPoolAction)
         {
             _direction = direction;
             _startPosition = transform.position;
@@ -32,6 +34,8 @@ namespace PlayerWeapon.Weapon.Bullet
             _damageEffects = damageEffects;
 
             _senderGO = senderGO;
+
+            _returnToPoolAction = returnToPoolAction;
         }
 
         private void Update()
@@ -53,10 +57,10 @@ namespace PlayerWeapon.Weapon.Bullet
                 damageable.TakeDamage(_damage);
                 ApplyDamageEffects(damageable);
             }
-            
-            Destroy(gameObject);
+
+            _returnToPoolAction?.Invoke(this);
         }
-        
+
         private void ApplyDamageEffects(IDamageable target)
         {
             foreach (var effect in _damageEffects)
@@ -64,16 +68,16 @@ namespace PlayerWeapon.Weapon.Bullet
                 effect.ApplyEffect(target);
             }
         }
-        
+
         private void Move()
         {
             transform.position += _direction * _speed * Time.deltaTime;
         }
-        
+
         private void TryToDestroy()
         {
             if (Vector3.Distance(_startPosition, transform.position) >= _range)
-                Destroy(gameObject);
+                _returnToPoolAction?.Invoke(this);
         }
     }
 }

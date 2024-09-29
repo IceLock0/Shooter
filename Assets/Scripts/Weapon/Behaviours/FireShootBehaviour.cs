@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PlayerWeapon.Weapon.Bullet;
 using PlayerWeapon.Weapon.Bullet.BulletEffects;
+using Services.ObjectPool;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -9,6 +10,8 @@ namespace Weapon
 {
     public class FireShootBehaviour : IShootBehaviour
     {
+        private ObjectPool<Bullet> _bulletPool;
+        
         private Bullet _bulletPrefab;
         private FireWeapon.FireWeapon.FireWeaponData _weaponData;
 
@@ -19,10 +22,15 @@ namespace Weapon
         private List<IDamageEffect> _damageEffects;
 
         private GameObject _senderGO;
+
+        private const int POOL_SIZE = 2;
         public FireShootBehaviour(Bullet bulletPrefab, FireWeapon.FireWeapon.FireWeaponData weaponData,
             IShootDirectionProvider shootDirectionProvider, Transform firePointTransform, List<IDamageEffect> damageEffects, GameObject senderGO)
         {
-            InvariantChecker.CheckObjectInvariant(bulletPrefab, weaponData, shootDirectionProvider, damageEffects);
+            InvariantChecker.CheckObjectInvariant(bulletPrefab, weaponData, shootDirectionProvider, damageEffects, senderGO);
+            
+            _bulletPool = new ObjectPool<Bullet>(bulletPrefab, POOL_SIZE);
+            
             _bulletPrefab = bulletPrefab;
             _weaponData = weaponData;
 
@@ -54,11 +62,14 @@ namespace Weapon
 
                 var spreadAngle = ApplySpread();
                 
-                var bullet = GameObject.Instantiate(_bulletPrefab, spawnPosition, Quaternion.Euler(spreadAngle), null);
+               var bullet = _bulletPool.Get();
+               
+               bullet.transform.position = spawnPosition;
+               bullet.transform.rotation = Quaternion.Euler(spreadAngle);
 
-                Debug.Log($"Bullet = {bullet.transform.position}, Rotation = {bullet.transform.rotation}");
+               Debug.Log($"Bullet = {bullet.transform.position}, Rotation = {bullet.transform.rotation}");
                 
-                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects, _senderGO);
+                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects, _senderGO, ReturnBulletToPool);
             }
         }
 
@@ -75,5 +86,9 @@ namespace Weapon
             return angle;
         }
 
+        private void ReturnBulletToPool(Bullet bullet)
+        {
+            _bulletPool.ReturnToPool(bullet);
+        }
     }
 }
