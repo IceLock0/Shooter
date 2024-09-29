@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Weapon.View
+﻿namespace Weapon.View
 {
     public class WeaponView
     {

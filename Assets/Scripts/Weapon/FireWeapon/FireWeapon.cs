@@ -27,13 +27,13 @@ namespace Weapon.FireWeapon
 
         public void Shoot()
         {
-            if (!IsCanShoot()) return;
-
-            if (_weaponData.CurrentAmmo < _weaponData.ConfigData.BulletPerShoot)
+            if (_weaponData.CurrentAmmo < _weaponData.ConfigData.BulletPerShoot && !_isReloading)
             {
                 StartCoroutine(Reload());
                 return;
             }
+            
+            if (_fireTimer < _weaponData.ConfigData.FireRate) return;
 
             _shootBehaviour.Shoot();
             
@@ -50,11 +50,6 @@ namespace Weapon.FireWeapon
             _isReloading = false;
         }
 
-        private bool IsCanShoot()
-        {
-            return !(_isReloading || _fireTimer < _weaponData.ConfigData.FireRate);
-        }
-        
         private void Update()
         {
             _fireTimer += Time.deltaTime;
