@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MachineGun Config
   m_EditorClassIdentifier: 
   _weaponType: 3
-  _damage: 0.5
-  _fireRate: 0.5
+  _damage: 6.5
+  _fireRate: 0.33
   _range: 10
-  _fireSpread: 3
-  _reloadTime: 2
-  _magazineCapacity: 3
+  _fireSpread: 0
+  _reloadTime: 1.7
+  _magazineCapacity: 7
   _bulletPerShoot: 1

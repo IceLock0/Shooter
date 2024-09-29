@@ -35,6 +35,9 @@ namespace Weapon
         {
             Vector3 direction = _shootDirectionProvider.GetShootDirection();
 
+            if (direction == Vector3.zero)
+                return;
+            
             var origin = _firePointTransform.position;
 
             var bulletsToSpawn = _weaponData.ConfigData.BulletPerShoot;

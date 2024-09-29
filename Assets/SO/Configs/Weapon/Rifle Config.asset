@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Rifle Config
   m_EditorClassIdentifier: 
   _weaponType: 2
-  _damage: 1
-  _fireRate: 1
-  _range: 10
-  _fireSpread: 5
-  _reloadTime: 0.1
+  _damage: 10
+  _fireRate: 1.2
+  _range: 6.5
+  _fireSpread: 6
+  _reloadTime: 1.5
   _magazineCapacity: 4
   _bulletPerShoot: 2

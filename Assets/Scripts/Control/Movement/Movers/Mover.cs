@@ -25,7 +25,7 @@ namespace Movement
         private void TryMove(Vector2 direction)
         {
             Vector3 directionVector3 = -transform.forward * direction.x + transform.right * direction.y;
-            
+
             _characterController.Move(directionVector3 * CharacterConfig.LinearSpeed);
         }
     }
