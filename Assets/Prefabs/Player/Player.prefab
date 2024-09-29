@@ -126,9 +126,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9072263058249794949}
   - component: {fileID: 120371995089299769}
-  - component: {fileID: 6015675727820981405}
   - component: {fileID: 7843053795227582824}
   - component: {fileID: 8125580683831741281}
+  - component: {fileID: 5278904209303955980}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -180,18 +180,6 @@ CharacterController:
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6015675727820981405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550108905178578001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3219262e1bd4031b39448c2186da96a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7843053795227582824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +202,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fb2252f0e1b445aab45d77e2a88f743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireWeaponPrefabs:
+  - {fileID: 3007706868624864853, guid: c5f049d978a897f49b42ec7e950a8df7, type: 3}
+  - {fileID: -5041802489510876216, guid: 5a5cd60572fe66d49b0955e716263da0, type: 3}
+  - {fileID: 8206629655341194544, guid: 3f1820772907eb3478bfe2a7192af512, type: 3}
+  - {fileID: 974940047342284067, guid: 07674a7e16302084eb92093401e37634, type: 3}
+  _weaponHolderTransform: {fileID: 8111494866807949034}
+  _bulletPrefab: {fileID: 36994039447059890, guid: 9792999508a9af8418e55ce7bd3dd5dd, type: 3}
+--- !u!114 &5278904209303955980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550108905178578001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72048357c704787956ef86437ba7c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6152126557052242361
@@ -275,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 6228224710906932828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.21199992, y: 0.45799994, z: 0.035000026}
+  m_LocalPosition: {x: 0.3, y: 0.45799994, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -291,7 +298,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.23709506, g: 0.32099205, b: 0.4528302, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

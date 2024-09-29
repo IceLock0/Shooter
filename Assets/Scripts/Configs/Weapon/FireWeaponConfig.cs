@@ -1,5 +1,5 @@
 ﻿using System;
-using Enum;
+using PlayerWeapon.Enum;
 using UnityEngine;
 
 namespace Configs.Weapon
@@ -7,7 +7,7 @@ namespace Configs.Weapon
     [CreateAssetMenu(fileName = "FireWeapon config", menuName = "Configs/FireWeapon", order = 0)]
     public class FireWeaponConfig : ScriptableObject
     {
-        [SerializeField] private WeaponType weaponType;
+        [SerializeField] private FireWeaponType _weaponType;
         
         [SerializeField] private float _damage;
         [SerializeField] private float _fireRate;
@@ -17,7 +17,7 @@ namespace Configs.Weapon
         [SerializeField] private int _magazineCapacity;
         [SerializeField] private int _bulletPerShoot;
         
-        public WeaponType WeaponType => weaponType;
+        public FireWeaponType WeaponType => _weaponType;
 
         public float Damage => _damage;
         public float FireRate => _fireRate;

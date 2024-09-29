@@ -23,7 +23,7 @@ namespace Movement
         {
             _direction = GetDirection();
             
-            _controllable.Control(_direction);
+            _controllable.Control(_direction * Time.fixedDeltaTime);
         }
         
     }

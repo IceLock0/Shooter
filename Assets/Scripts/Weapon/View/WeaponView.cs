@@ -1,38 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Enum;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
-
-namespace Weapon
+namespace Weapon.View
 {
-    public class WeaponView : IDisposable
+    public class WeaponView
     {
-        private List<FireWeapon.FireWeapon> _fireWeapons;
+        private FireWeapon.FireWeapon _lastWeapon;
         
-        private WeaponChanger _weaponChanger;
-        
-        [Inject]
-        public void Initialize(WeaponChanger weaponChanger, List<FireWeapon.FireWeapon> fireWeapons)
+        public void ChangeWeaponVisible(FireWeapon.FireWeapon weaponType)
         {
-            _weaponChanger = weaponChanger;
+            Debug.Log("Change");
             
-            _fireWeapons = fireWeapons;
-
-            _weaponChanger.WeaponChanged += SetCurrentWeapon;
-        }
-        
-        private void SetCurrentWeapon(WeaponType weaponType)
-        {
-            foreach (var weapon in _fireWeapons)
-                weapon.gameObject.SetActive(weapon.IsWeaponTypeMatch(weaponType));
-        }
-
-        public void Dispose()
-        {
-            _weaponChanger.WeaponChanged -= SetCurrentWeapon;
-        }
+            if(_lastWeapon)
+                _lastWeapon.gameObject.SetActive(false);
+            
+            weaponType.gameObject.SetActive(true);
+            
+            _lastWeapon = weaponType;
+        } 
     }
 }

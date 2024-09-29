@@ -6,7 +6,7 @@ namespace Movement
     {
         protected override Vector2 GetDirection()
         {
-            throw new System.NotImplementedException();
+            return Vector2.left;
         }
     }
 }   

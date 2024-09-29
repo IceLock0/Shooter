@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Configs.Character;
 using UnityEngine;
 using Weapon.FireWeapon;
+using Weapon.View;
 using Zenject;
 using Random = UnityEngine.Random;
 
 namespace PlayerWeapon.Weapon
 {
-    public class EnemyWeaponHandler : MonoBehaviour
+    public class EnemyWeaponHandler : WeaponHandler
     {
         private EnemyConfig _enemyConfig;
         private float _attackTimer;
 
-        private FireWeapon _currentWeapon;
-
         [Inject]
-        public void Initialize(EnemyConfig enemyConfig, List<FireWeapon> fireWeapons)
+        public void Initialize(EnemyConfig enemyConfig)
         {
             _enemyConfig = enemyConfig;
-            InitializeRandomWeapon(fireWeapons);
 
-            if (_currentWeapon == null)
-                throw new NullReferenceException($"Enemy`s weapon not set.");
-        }
-        
-        private void Update()
-        {
-            if(IsCanShoot())
-                _currentWeapon.Shoot();
+            CurrentWeapon = CreateWeapon(GetRandomWeaponPrefab());
+
+            WeaponView weaponView = new WeaponView();
+            
+            weaponView.ChangeWeaponVisible(CurrentWeapon);
         }
 
-        private bool IsCanShoot()
+        protected override bool IsCanShoot()
         {
             var timeExpired = _attackTimer >= _enemyConfig.AttackRate;
 
@@ -39,11 +33,9 @@ namespace PlayerWeapon.Weapon
                 _attackTimer = 0.0f;
             else _attackTimer += Time.deltaTime;
             
-            
             return timeExpired;
-        } 
+        }
 
-        private void InitializeRandomWeapon(List<FireWeapon> fireWeapons) =>
-            _currentWeapon = fireWeapons[Random.Range(0, fireWeapons.Count - 1)];
+        private FireWeapon GetRandomWeaponPrefab() => FireWeaponPrefabs[Random.Range(0, FireWeaponPrefabs.Count - 1)];
     }
 }

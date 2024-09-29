@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Configs.Weapon;
-using Enum;
-using Unity.VisualScripting;
 using UnityEngine;
-using Weapon.Components;
-
 namespace Weapon.FireWeapon
 {
     public class FireWeapon : MonoBehaviour, IFireWeapon
@@ -17,9 +13,7 @@ namespace Weapon.FireWeapon
         private bool _isReloading;
 
         private float _fireTimer;
-
-        public FireWeaponData WeaponData => _weaponData;
-
+        
         public void Initialize(IShootBehaviour shootBehaviour)
         {
             _shootBehaviour = shootBehaviour;
@@ -28,6 +22,8 @@ namespace Weapon.FireWeapon
 
             _fireTimer = _weaponData.ConfigData.FireRate;
         }
+        
+        public FireWeaponData WeaponData => _weaponData;
 
         public void Shoot()
         {
@@ -52,18 +48,11 @@ namespace Weapon.FireWeapon
             _isReloading = false;
         }
 
-        public bool IsWeaponTypeMatch(WeaponType weaponType) => weaponType == _weaponData.ConfigData.WeaponType;
-
         private bool IsCanShoot()
         {
             return !(_isReloading || _fireTimer < _weaponData.ConfigData.FireRate);
         }
-
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
-
+        
         private void Update()
         {
             _fireTimer += Time.deltaTime;

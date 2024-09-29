@@ -17,7 +17,7 @@ namespace Movement
         }
 
         protected override Vector2 GetDirection() =>
-            _inputService.Gameplay.Movement.ReadValue<Vector2>().normalized * Time.fixedDeltaTime;
+            _inputService.Gameplay.Movement.ReadValue<Vector2>().normalized;
         
         private void OnDisable()
         {

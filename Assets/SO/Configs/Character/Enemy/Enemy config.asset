@@ -15,3 +15,4 @@ MonoBehaviour:
   _hp: 5
   _linearSpeed: 3
   _angularSpeed: 8
+  _attackRate: 3
