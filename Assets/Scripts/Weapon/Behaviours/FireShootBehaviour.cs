@@ -59,31 +59,25 @@ namespace Weapon
             {
                 var offset = Vector3.right * (startOffset + i * bulletSpacing);
                 var spawnPosition = origin + offset;
-
-                var spreadAngle = ApplySpread();
                 
                var bullet = _bulletPool.Get();
                
                bullet.transform.position = spawnPosition;
-               bullet.transform.rotation = Quaternion.Euler(spreadAngle);
+               bullet.transform.rotation = Quaternion.identity;
 
-               Debug.Log($"Bullet = {bullet.transform.position}, Rotation = {bullet.transform.rotation}");
-                
+               direction = ApplySpread(direction);
+               
                 bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects, _senderGO, ReturnBulletToPool);
             }
         }
 
-        private Vector3 ApplySpread()
+        private Vector3 ApplySpread(Vector3 direction)
         {
-            Vector3 angle = _firePointTransform.eulerAngles;
+            float spreadAngle = Random.Range(-_weaponData.ConfigData.FireSpread, _weaponData.ConfigData.FireSpread);
+    
+            direction = Quaternion.Euler(0, 0, spreadAngle) * direction;
 
-            float spreadX = Random.Range(-_weaponData.ConfigData.FireSpread, _weaponData.ConfigData.FireSpread);
-            float spreadY = Random.Range(-_weaponData.ConfigData.FireSpread, _weaponData.ConfigData.FireSpread);
-            
-            angle.x += spreadX;
-            angle.y += spreadY;
-
-            return angle;
+            return direction.normalized;
         }
 
         private void ReturnBulletToPool(Bullet bullet)
