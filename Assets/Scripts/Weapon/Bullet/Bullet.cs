@@ -39,15 +39,18 @@ namespace PlayerWeapon.Weapon.Bullet
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Trigger");
+            
             var damageable = other.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(_damage);
                 ApplyDamageEffects(damageable);
             }
+            
             Destroy(gameObject);
         }
-
+        
         private void ApplyDamageEffects(IDamageable target)
         {
             foreach (var effect in _damageEffects)

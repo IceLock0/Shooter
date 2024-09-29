@@ -32,8 +32,6 @@ namespace Movement
 
         private void Update()
         {
-            if (!_playerTransform) return;
-
             Move();
             
             if (_agent.remainingDistance <= _agent.stoppingDistance && !_agent.pathPending)
