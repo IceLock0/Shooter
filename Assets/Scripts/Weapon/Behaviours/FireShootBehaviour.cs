@@ -18,8 +18,9 @@ namespace Weapon
 
         private List<IDamageEffect> _damageEffects;
 
+        private GameObject _senderGO;
         public FireShootBehaviour(Bullet bulletPrefab, FireWeapon.FireWeapon.FireWeaponData weaponData,
-            IShootDirectionProvider shootDirectionProvider, Transform firePointTransform, List<IDamageEffect> damageEffects)
+            IShootDirectionProvider shootDirectionProvider, Transform firePointTransform, List<IDamageEffect> damageEffects, GameObject senderGO)
         {
             InvariantChecker.CheckObjectInvariant(bulletPrefab, weaponData, shootDirectionProvider, damageEffects);
             _bulletPrefab = bulletPrefab;
@@ -29,6 +30,8 @@ namespace Weapon
             _firePointTransform = firePointTransform;
 
             _damageEffects = damageEffects;
+
+            _senderGO = senderGO;
         }
 
         public void Shoot()
@@ -49,25 +52,28 @@ namespace Weapon
                 var offset = Vector3.right * (startOffset + i * bulletSpacing);
                 var spawnPosition = origin + offset;
 
-                var bullet = GameObject.Instantiate(_bulletPrefab, spawnPosition, Quaternion.identity, null);
-
-                direction = ApplySpread(direction, _weaponData.ConfigData.FireSpread);
+                var spreadAngle = ApplySpread();
                 
-                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects);
+                var bullet = GameObject.Instantiate(_bulletPrefab, spawnPosition, Quaternion.Euler(spreadAngle), null);
+
+                Debug.Log($"Bullet = {bullet.transform.position}, Rotation = {bullet.transform.rotation}");
+                
+                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects, _senderGO);
             }
         }
 
-        private Vector3 ApplySpread(Vector3 direction, float spread)
+        private Vector3 ApplySpread()
         {
-            var minValue = spread - spread * 0.2f;
-            var maxValue = spread + spread * 0.2f;
-            
-            float rndSpreadX = Random.Range(minValue, maxValue);
-            float rndSpreadY = Random.Range(minValue, maxValue);
-            
-            Quaternion spreadRotation = Quaternion.Euler(rndSpreadX, rndSpreadY, 0);
+            Vector3 angle = _firePointTransform.eulerAngles;
 
-            return spreadRotation * direction;
+            float spreadX = Random.Range(-_weaponData.ConfigData.FireSpread, _weaponData.ConfigData.FireSpread);
+            float spreadY = Random.Range(-_weaponData.ConfigData.FireSpread, _weaponData.ConfigData.FireSpread);
+            
+            angle.x += spreadX;
+            angle.y += spreadY;
+
+            return angle;
         }
+
     }
 }

@@ -19,7 +19,9 @@ namespace PlayerWeapon.Weapon.Bullet
 
         private List<IDamageEffect> _damageEffects;
 
-        public void Initialize(Vector3 direction, float range, float damage, List<IDamageEffect> damageEffects)
+        private GameObject _senderGO;
+        
+        public void Initialize(Vector3 direction, float range, float damage, List<IDamageEffect> damageEffects, GameObject senderGO)
         {
             _direction = direction;
             _startPosition = transform.position;
@@ -28,6 +30,8 @@ namespace PlayerWeapon.Weapon.Bullet
             _damage = damage;
 
             _damageEffects = damageEffects;
+
+            _senderGO = senderGO;
         }
 
         private void Update()
@@ -39,9 +43,11 @@ namespace PlayerWeapon.Weapon.Bullet
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Trigger");
-            
             var damageable = other.GetComponent<IDamageable>();
+
+            if (other.CompareTag(_senderGO.tag) || other.CompareTag(tag))
+                return;
+
             if (damageable != null)
             {
                 damageable.TakeDamage(_damage);

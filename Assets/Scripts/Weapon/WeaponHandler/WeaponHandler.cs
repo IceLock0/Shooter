@@ -39,7 +39,7 @@ namespace PlayerWeapon.Weapon
             var weaponEffects = _damageEffectFactory.CreateEffectsForWeapon(weaponPrefab);
             
             var behaviour = new FireShootBehaviour(_bulletPrefab, weaponPrefab.WeaponData, GetShootDirectionProvider(), _firePointTransform,
-                weaponEffects);
+                weaponEffects, gameObject);
 
             var weapon = _fireWeaponFactory.CreateWeaponFromPrefab(behaviour, weaponPrefab,
                 _weaponHolderTransform.position, Quaternion.identity, _weaponHolderTransform);
