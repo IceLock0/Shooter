@@ -2,13 +2,15 @@
 using Weapon.FireWeapon;
 using Zenject;
 using System.Collections.Generic;
+using PlayerWeapon.Weapon.Bullet;
 using Weapon;
-using Weapon.View;
 
 namespace PlayerWeapon.Weapon
 {
     public abstract class WeaponHandler : MonoBehaviour
     {
+        [SerializeField] private Transform _firePointTransform;
+        
         [SerializeField] protected List<FireWeapon> FireWeaponPrefabs;
         
         [SerializeField] private Transform _weaponHolderTransform;
@@ -28,12 +30,14 @@ namespace PlayerWeapon.Weapon
         {
             return
                 _fireWeaponFactory.CreateWeaponFromPrefab(
-                    new FireShootBehaviour(_bulletPrefab, weaponPrefab.WeaponData),
+                    new FireShootBehaviour(_bulletPrefab, weaponPrefab.WeaponData, GetShootDirectionProvider(), _firePointTransform),
                     weaponPrefab, _weaponHolderTransform.position, Quaternion.identity, _weaponHolderTransform);
         }
 
         protected abstract bool IsCanShoot();
 
+        protected abstract IShootDirectionProvider GetShootDirectionProvider();
+        
         private void Update()
         {
             if (IsCanShoot())

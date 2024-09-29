@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Configs.Character;
+using PlayerWeapon.Weapon.Bullet;
+using Unity.VisualScripting;
 using UnityEngine;
 using Weapon.FireWeapon;
 using Weapon.View;
@@ -10,6 +12,8 @@ namespace PlayerWeapon.Weapon
 {
     public class EnemyWeaponHandler : WeaponHandler
     {
+        [SerializeField] private Transform _playerTransform;
+        
         private EnemyConfig _enemyConfig;
         private float _attackTimer;
 
@@ -35,6 +39,9 @@ namespace PlayerWeapon.Weapon
             
             return timeExpired;
         }
+
+        protected override IShootDirectionProvider GetShootDirectionProvider() =>
+            new EnemyShootDirectionProvider(transform, _playerTransform);
 
         private FireWeapon GetRandomWeaponPrefab() => FireWeaponPrefabs[Random.Range(0, FireWeaponPrefabs.Count - 1)];
     }

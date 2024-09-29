@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145df92d479f438b9abdc3901cd06c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firePointTransform: {fileID: 6149182026559652893}
   FireWeaponPrefabs:
   - {fileID: 3007706868624864853, guid: c5f049d978a897f49b42ec7e950a8df7, type: 3}
   - {fileID: -5041802489510876216, guid: 5a5cd60572fe66d49b0955e716263da0, type: 3}
@@ -130,6 +131,7 @@ MonoBehaviour:
   - {fileID: 974940047342284067, guid: 07674a7e16302084eb92093401e37634, type: 3}
   _weaponHolderTransform: {fileID: 7776024132468391053}
   _bulletPrefab: {fileID: 36994039447059890, guid: 9792999508a9af8418e55ce7bd3dd5dd, type: 3}
+  _playerTransform: {fileID: 0}
 --- !u!1 &2745845640905160355
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +248,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6211952366635755676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6149182026559652893}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6149182026559652893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211952366635755676}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7776024132468391053}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &8687139694346855864
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +307,8 @@ Transform:
   m_LocalPosition: {x: 0.338, y: 0, z: 0.957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6149182026559652893}
   m_Father: {fileID: 6067138301927996866}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &8768851378359899927

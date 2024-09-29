@@ -1,4 +1,5 @@
 ﻿using System;
+using Characters;
 using UnityEngine;
 
 namespace PlayerWeapon.Weapon.Bullet
@@ -11,12 +12,16 @@ namespace PlayerWeapon.Weapon.Bullet
         private Vector3 _direction;
         private Vector3 _startPosition;
         private float _range;
+
+        private float _damage;
         
-        public void Initialize(Vector3 direction, float range)
+        public void Initialize(Vector3 direction, float range, float damage)
         {
             _direction = direction;
             _startPosition = transform.position;
             _range = range;
+
+            _damage = damage;
         }
 
         private void Update()
@@ -28,7 +33,7 @@ namespace PlayerWeapon.Weapon.Bullet
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"Collide with = {other.name}");
+            other.GetComponent<IDamageable>().TakeDamage(_damage);
         }
 
         private void Move()

@@ -6,7 +6,7 @@ namespace Movement
     {
         protected override Vector2 GetDirection()
         {
-            return Vector2.left;
+            return Vector2.zero;
         }
     }
 }   

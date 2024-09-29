@@ -8,7 +8,7 @@ namespace Configs.Character
         [SerializeField] private float _hp;
         [SerializeField] private float _linearSpeed;
 
-        public float Hp => _hp;
+        public float HP => _hp;
         public float LinearSpeed => _linearSpeed;
 
         private void OnValidate()

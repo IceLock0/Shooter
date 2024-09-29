@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PlayerWeapon.Weapon;
+using PlayerWeapon.Weapon.Bullet;
 using UnityEngine.InputSystem;
 using Weapon;
 using Weapon.FireWeapon;
@@ -43,6 +44,7 @@ namespace PlayerWeapon
         }
 
         protected override bool IsCanShoot() => _isShooting;
+        protected override IShootDirectionProvider GetShootDirectionProvider() => new PlayerShootDirectionProvider();
 
         private void SetCurrentWeapon(FireWeapon fireWeapon) => CurrentWeapon = fireWeapon;
 

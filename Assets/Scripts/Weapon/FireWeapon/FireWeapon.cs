@@ -35,8 +35,10 @@ namespace Weapon.FireWeapon
                 return;
             }
 
-            _weaponData.CurrentAmmo -= _weaponData.ConfigData.BulletPerShoot;
+            _shootBehaviour.Shoot();
             
+            _weaponData.CurrentAmmo -= _weaponData.ConfigData.BulletPerShoot;
+
             _fireTimer = 0.0f;
         }
 
