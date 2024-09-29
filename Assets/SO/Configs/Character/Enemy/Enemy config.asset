@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 100
   _linearSpeed: 3
-  _angularSpeed: 100
-  _obstacleRangeReaction: 3
+  _angularSpeed: 300
+  _averageStoppingDistance: 4.89
   _attackRate: 1
+  _acceleration: 7
