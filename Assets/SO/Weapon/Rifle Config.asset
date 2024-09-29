@@ -16,7 +16,7 @@ MonoBehaviour:
   _damage: 10
   _fireRate: 1.2
   _range: 6.5
-  _fireSpread: 5
+  _fireSpread: 20
   _reloadTime: 1.5
   _magazineCapacity: 4
   _bulletPerShoot: 2
