@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using PlayerWeapon.Weapon.Bullet;
 using UnityEngine;
+using Weapon.Weapon;
 using Zenject;
 
 namespace Weapon
 {
-    public class FireWeaponFactory
+    public class FireWeaponFactory : IFireWeaponFactory
     {
         public FireWeapon.FireWeapon CreateWeaponFromPrefab(IShootBehaviour shootBehaviour, FireWeapon.FireWeapon prefab, Vector3 at, Quaternion rotation, Transform parent = null)
         {

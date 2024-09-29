@@ -8,8 +8,6 @@ namespace Weapon.View
         
         public void ChangeWeaponVisible(FireWeapon.FireWeapon weaponType)
         {
-            Debug.Log("Change");
-            
             if(_lastWeapon)
                 _lastWeapon.gameObject.SetActive(false);
             

@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using PlayerWeapon.Weapon.Bullet;
+using PlayerWeapon.Weapon.Bullet.BulletEffects;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -15,15 +16,19 @@ namespace Weapon
 
         private Transform _firePointTransform;
 
+        private List<IDamageEffect> _damageEffects;
+
         public FireShootBehaviour(Bullet bulletPrefab, FireWeapon.FireWeapon.FireWeaponData weaponData,
-            IShootDirectionProvider shootDirectionProvider, Transform firePointTransform)
+            IShootDirectionProvider shootDirectionProvider, Transform firePointTransform, List<IDamageEffect> damageEffects)
         {
-            InvariantChecker.CheckObjectInvariant(bulletPrefab, weaponData, shootDirectionProvider);
+            InvariantChecker.CheckObjectInvariant(bulletPrefab, weaponData, shootDirectionProvider, damageEffects);
             _bulletPrefab = bulletPrefab;
             _weaponData = weaponData;
 
             _shootDirectionProvider = shootDirectionProvider;
             _firePointTransform = firePointTransform;
+
+            _damageEffects = damageEffects;
         }
 
         public void Shoot()
@@ -44,8 +49,8 @@ namespace Weapon
                 var bullet = GameObject.Instantiate(_bulletPrefab, spawnPosition, Quaternion.identity, null);
 
                 direction = ApplySpread(direction, _weaponData.ConfigData.FireSpread);
-                ;
-                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage);
+                
+                bullet.Initialize(direction, _weaponData.ConfigData.Range, _weaponData.ConfigData.Damage, _damageEffects);
             }
         }
 

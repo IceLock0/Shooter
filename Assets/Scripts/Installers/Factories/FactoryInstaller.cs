@@ -1,4 +1,6 @@
-﻿using Weapon;
+﻿using Services.Factories.Weapon.DamageEffect;
+using Weapon;
+using Weapon.Weapon;
 using Zenject;
 
 namespace Configs.Factories
@@ -8,11 +10,17 @@ namespace Configs.Factories
         public override void InstallBindings()
         {
             BindFireWeaponFactory();
+            BindDamageEffectFactory();
         }
 
         private void BindFireWeaponFactory()
         {
-            Container.Bind<FireWeaponFactory>().AsSingle().NonLazy();
+            Container.Bind<IFireWeaponFactory>().To<FireWeaponFactory>().AsSingle().NonLazy();
+        }
+        
+        private void BindDamageEffectFactory()
+        {
+            Container.Bind<IDamageEffectFactory>().To<DamageEffectFactory>().AsSingle().NonLazy();
         }
     }
 }

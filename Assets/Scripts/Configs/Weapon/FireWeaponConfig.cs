@@ -1,12 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using PlayerWeapon.Enum;
+using PlayerWeapon.Weapon.Bullet.BulletEffects;
 using UnityEngine;
 
 namespace Configs.Weapon
 {
-    [CreateAssetMenu(fileName = "FireWeapon config", menuName = "Configs/FireWeapon", order = 0)]
+    [CreateAssetMenu(fileName = "FireWeapon config", menuName = "Configs/Weapon/FireWeapon", order = 0)]
     public class FireWeaponConfig : ScriptableObject
     {
+        [Header("Base Weapon")]
         [SerializeField] private FireWeaponType _weaponType;
         
         [SerializeField] private float _damage;

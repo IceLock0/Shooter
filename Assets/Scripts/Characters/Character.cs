@@ -14,7 +14,9 @@ namespace Characters
         {
             _hp.TakeDamage(amount);
         }
-        
+
+        public bool IsAlive() => gameObject.activeSelf;
+
         private void Awake()
         {
             _hp = new CharacterHP(_characterConfig.HP);

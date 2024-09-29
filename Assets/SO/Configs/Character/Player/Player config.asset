@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae8b0b0fde94362a550b91105d45af0, type: 3}
   m_Name: Player config
   m_EditorClassIdentifier: 
-  _hp: 100
+  _hp: 5
   _linearSpeed: 5
-  _mouseSensitivity: 50
+  _mouseSensitivity: 20
